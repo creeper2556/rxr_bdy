@@ -5,6 +5,13 @@ function L () {
         gg.move(4)
     }
 }
+function js (ms: number) {
+    basic.pause(ms)
+    yy.delete()
+    zd.delete()
+    gg.delete()
+    basic.showString("GAMEOVER")
+}
 input.onButtonPressed(Button.A, function () {
     L2()
 })
@@ -12,7 +19,6 @@ function win () {
     yy.delete()
     zd.delete()
     gg.delete()
-    game.pause()
     basic.showLeds(`
         # # # # #
         # # # # #
@@ -92,10 +98,10 @@ let p = 0
 let zd: game.LedSprite = null
 let gg: game.LedSprite = null
 let yy: game.LedSprite = null
-game.startCountdown(20000)
 yy = game.createSprite(2, 4)
 gg = game.createSprite(2, 0)
 let cd = 0
+js(20000)
 basic.forever(function () {
     p = randint(0, 3)
     if (p == 0) {
