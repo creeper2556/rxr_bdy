@@ -73,10 +73,13 @@ function R (sprite: game.LedSprite) {
         sprite.move(-4)
     }
 }
+let gx = 0
 let p = 0
-let zd: game.LedSprite = null
 let gg: game.LedSprite = null
 let yy: game.LedSprite = null
+let zd: game.LedSprite = null
+zd = game.createSprite(2, 2)
+zd.delete()
 yy = game.createSprite(2, 4)
 gg = game.createSprite(2, 0)
 let cd = 0
@@ -88,6 +91,9 @@ basic.forever(function () {
         if (p == 1) {
             R(gg)
         }
+    }
+    if (!(zd.isDeleted())) {
+        gx = (0 + zd.get(LedSpriteProperty.X)) % 4
     }
     basic.pause(500)
 })
