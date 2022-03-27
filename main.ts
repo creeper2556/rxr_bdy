@@ -73,7 +73,7 @@ function R (sprite: game.LedSprite) {
         sprite.move(-4)
     }
 }
-let gx = 0
+let px = false
 let p = 0
 let gg: game.LedSprite = null
 let yy: game.LedSprite = null
@@ -83,8 +83,8 @@ zd.delete()
 yy = game.createSprite(2, 4)
 gg = game.createSprite(2, 0)
 let cd = 0
+let gx = -1
 basic.forever(function () {
-    p = randint(0, 3)
     if (p == 0) {
         L(gg)
     } else {
@@ -92,10 +92,20 @@ basic.forever(function () {
             R(gg)
         }
     }
-    if (!(zd.isDeleted())) {
-        gx = (0 + zd.get(LedSpriteProperty.X)) % 4
+    gx = (0 + zd.get(LedSpriteProperty.X)) % 4
+    if (!(!(zd.isDeleted()) || gg.get(LedSpriteProperty.X) == gx)) {
+        gx = -1
     }
     basic.pause(500)
+    p = randint(0, 3)
+    if (gx != -1) {
+        px = gx > gg.get(LedSpriteProperty.X)
+        if (0 > 0) {
+            p = 0
+        } else {
+            p = 1
+        }
+    }
 })
 basic.forever(function () {
     cd += -1
