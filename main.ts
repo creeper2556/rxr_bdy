@@ -8,6 +8,62 @@ function L () {
 input.onButtonPressed(Button.A, function () {
     L2()
 })
+function win () {
+    yy.delete()
+    zd.delete()
+    gg.delete()
+    game.pause()
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        `)
+    basic.showLeds(`
+        . . . . .
+        . # # # .
+        . # # # .
+        . # # # .
+        . . . . .
+        `)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . # . .
+        . . . . .
+        . . . . .
+        `)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+    basic.showLeds(`
+        . . . . .
+        . # # # .
+        . # . # .
+        . # # # .
+        . . . . .
+        `)
+    basic.showLeds(`
+        # # # # #
+        # . . . #
+        # . . . #
+        # . . . #
+        # # # # #
+        `)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+    basic.showString("YOU WIN!")
+}
 function R2 () {
     if (!(yy.get(LedSpriteProperty.X) == 4)) {
         yy.move(1)
@@ -32,13 +88,14 @@ function R () {
         gg.move(-4)
     }
 }
-let zd: game.LedSprite = null
-let cd = 0
 let p = 0
+let zd: game.LedSprite = null
 let gg: game.LedSprite = null
 let yy: game.LedSprite = null
+game.startCountdown(20000)
 yy = game.createSprite(2, 4)
 gg = game.createSprite(2, 0)
+let cd = 0
 basic.forever(function () {
     p = randint(0, 3)
     if (p == 0) {
@@ -62,7 +119,7 @@ basic.forever(function () {
         while (!(zd.get(LedSpriteProperty.Y) == 0)) {
             zd.move(1)
             if (gg.isTouching(zd)) {
-                game.gameOver()
+                win()
             }
             basic.pause(100)
         }
