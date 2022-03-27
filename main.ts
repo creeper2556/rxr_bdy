@@ -1,19 +1,12 @@
-function L () {
-    if (!(gg.get(LedSpriteProperty.X) == 0)) {
-        gg.move(-1)
+function L (sprite: game.LedSprite) {
+    if (!(sprite.get(LedSpriteProperty.X) == 0)) {
+        sprite.move(-1)
     } else {
-        gg.move(4)
+        sprite.move(4)
     }
 }
-function js (ms: number) {
-    basic.pause(ms)
-    yy.delete()
-    zd.delete()
-    gg.delete()
-    basic.showString("GAMEOVER")
-}
 input.onButtonPressed(Button.A, function () {
-    L2()
+    L(yy)
 })
 function win () {
     yy.delete()
@@ -70,28 +63,14 @@ function win () {
         `)
     basic.showString("YOU WIN!")
 }
-function R2 () {
-    if (!(yy.get(LedSpriteProperty.X) == 4)) {
-        yy.move(1)
-    } else {
-        yy.move(-4)
-    }
-}
-function L2 () {
-    if (!(yy.get(LedSpriteProperty.X) == 0)) {
-        yy.move(-1)
-    } else {
-        yy.move(4)
-    }
-}
 input.onButtonPressed(Button.B, function () {
-    R2()
+    R(yy)
 })
-function R () {
-    if (!(gg.get(LedSpriteProperty.X) == 4)) {
-        gg.move(1)
+function R (sprite: game.LedSprite) {
+    if (!(sprite.get(LedSpriteProperty.X) == 4)) {
+        sprite.move(1)
     } else {
-        gg.move(-4)
+        sprite.move(-4)
     }
 }
 let p = 0
@@ -101,14 +80,13 @@ let yy: game.LedSprite = null
 yy = game.createSprite(2, 4)
 gg = game.createSprite(2, 0)
 let cd = 0
-js(20000)
 basic.forever(function () {
     p = randint(0, 3)
     if (p == 0) {
-        L()
+        L(gg)
     } else {
         if (p == 1) {
-            R()
+            R(gg)
         }
     }
     basic.pause(500)
