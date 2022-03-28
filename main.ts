@@ -73,8 +73,8 @@ function R (sprite: game.LedSprite) {
         sprite.move(-4)
     }
 }
-let k = 0
 let p = 0
+let k = 0
 let gg: game.LedSprite = null
 let yy: game.LedSprite = null
 let zd: game.LedSprite = null
@@ -84,6 +84,28 @@ yy = game.createSprite(2, 4)
 gg = game.createSprite(2, 0)
 let cd = 0
 let gx = -1
+basic.forever(function () {
+    cd += -1
+    basic.pause(1000)
+})
+basic.forever(function () {
+    if (!(zd.get(LedSpriteProperty.Y) == 0) && k == 1) {
+        zd.move(1)
+        if (gg.isTouching(zd)) {
+            win()
+        }
+        basic.pause(100)
+    } else {
+        k = 0
+        zd.delete()
+    }
+    if (input.buttonIsPressed(Button.AB) && cd <= 0) {
+        k = 1
+        cd = 2
+        zd = game.createSprite(yy.get(LedSpriteProperty.X), 3)
+        zd.set(LedSpriteProperty.Direction, 0)
+    }
+})
 basic.forever(function () {
     p = randint(0, 3)
     gx = (2 + zd.get(LedSpriteProperty.X)) % 5
@@ -113,26 +135,4 @@ basic.forever(function () {
         }
     }
     basic.pause(200)
-})
-basic.forever(function () {
-    cd += -1
-    basic.pause(1000)
-})
-basic.forever(function () {
-    if (!(zd.get(LedSpriteProperty.Y) == 0) && k == 1) {
-        zd.move(1)
-        if (gg.isTouching(zd)) {
-            win()
-        }
-        basic.pause(100)
-    } else {
-        k = 0
-        zd.delete()
-    }
-    if (input.buttonIsPressed(Button.AB) && cd <= 0) {
-        k = 1
-        cd = 2
-        zd = game.createSprite(yy.get(LedSpriteProperty.X), 3)
-        zd.set(LedSpriteProperty.Direction, 0)
-    }
 })
