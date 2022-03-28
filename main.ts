@@ -73,7 +73,7 @@ function R (sprite: game.LedSprite) {
         sprite.move(-4)
     }
 }
-let px = false
+let k = 0
 let p = 0
 let gg: game.LedSprite = null
 let yy: game.LedSprite = null
@@ -85,6 +85,26 @@ gg = game.createSprite(2, 0)
 let cd = 0
 let gx = -1
 basic.forever(function () {
+    p = randint(0, 3)
+    gx = (2 + zd.get(LedSpriteProperty.X)) % 5
+    if (zd.isDeleted()) {
+        gx = -1
+    }
+    if (gx != -1) {
+        if (gx > gg.get(LedSpriteProperty.X)) {
+            if (gg.get(LedSpriteProperty.X) + (5 - gx) < gx - gg.get(LedSpriteProperty.X)) {
+                p = 0
+            } else {
+                p = 1
+            }
+        } else {
+            if (gx - gg.get(LedSpriteProperty.X) < gx + (5 - gg.get(LedSpriteProperty.X))) {
+                p = 0
+            } else {
+                p = 1
+            }
+        }
+    }
     if (p == 0) {
         L(gg)
     } else {
@@ -92,37 +112,27 @@ basic.forever(function () {
             R(gg)
         }
     }
-    gx = (0 + zd.get(LedSpriteProperty.X)) % 4
-    if (!(!(zd.isDeleted()) || gg.get(LedSpriteProperty.X) == gx)) {
-        gx = -1
-    }
-    basic.pause(500)
-    p = randint(0, 3)
-    if (gx != -1) {
-        px = gx > gg.get(LedSpriteProperty.X)
-        if (0 > 0) {
-            p = 0
-        } else {
-            p = 1
-        }
-    }
+    basic.pause(200)
 })
 basic.forever(function () {
     cd += -1
     basic.pause(1000)
 })
 basic.forever(function () {
-    if (input.buttonIsPressed(Button.AB) && cd <= 0) {
+    if (!(zd.get(LedSpriteProperty.Y) == 0) && k == 1) {
+        zd.move(1)
+        if (gg.isTouching(zd)) {
+            win()
+        }
+        basic.pause(100)
+    } else {
+        k = 0
+        zd.delete()
+    }
+    if (true && cd <= 0) {
+        k = 1
         cd = 2
         zd = game.createSprite(yy.get(LedSpriteProperty.X), 3)
         zd.set(LedSpriteProperty.Direction, 0)
-        while (!(zd.get(LedSpriteProperty.Y) == 0)) {
-            zd.move(1)
-            if (gg.isTouching(zd)) {
-                win()
-            }
-            basic.pause(100)
-        }
-        zd.delete()
     }
 })
