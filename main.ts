@@ -75,6 +75,7 @@ function R (sprite: game.LedSprite) {
 }
 let p = 0
 let k = 0
+let cd = 0
 let gg: game.LedSprite = null
 let yy: game.LedSprite = null
 let zd: game.LedSprite = null
@@ -82,7 +83,6 @@ zd = game.createSprite(2, 2)
 zd.delete()
 yy = game.createSprite(2, 4)
 gg = game.createSprite(2, 0)
-let cd = 0
 let gx = -1
 basic.forever(function () {
     cd += -1
@@ -99,7 +99,7 @@ basic.forever(function () {
         k = 0
         zd.delete()
     }
-    if (cd <= 0) {
+    if (input.buttonIsPressed(Button.AB) && cd <= 0) {
         k = 1
         cd = 2
         zd = game.createSprite(yy.get(LedSpriteProperty.X), 3)
@@ -135,7 +135,4 @@ basic.forever(function () {
         }
     }
     basic.pause(200)
-})
-basic.forever(function () {
-    yy.set(LedSpriteProperty.X, gg.get(LedSpriteProperty.X))
 })
