@@ -109,6 +109,9 @@ basic.forever(function () {
 basic.forever(function () {
     p = randint(0, 3)
     gx = (2 + zd.get(LedSpriteProperty.X)) % 5
+    if (randint(0, 10) == 0) {
+        gx = zd.get(LedSpriteProperty.X)
+    }
     if (zd.isDeleted()) {
         gx = -1
     }
