@@ -99,7 +99,7 @@ basic.forever(function () {
         k = 0
         zd.delete()
     }
-    if (input.buttonIsPressed(Button.AB) && cd <= 0) {
+    if (true && cd <= 0) {
         k = 1
         cd = 2
         zd = game.createSprite(yy.get(LedSpriteProperty.X), 3)
@@ -120,7 +120,7 @@ basic.forever(function () {
                 p = 1
             }
         } else {
-            if (gx - gg.get(LedSpriteProperty.X) < gx + (5 - gg.get(LedSpriteProperty.X))) {
+            if (gg.get(LedSpriteProperty.X) - gx < gx + (5 - gg.get(LedSpriteProperty.X))) {
                 p = 0
             } else {
                 p = 1
